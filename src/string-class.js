@@ -34,5 +34,10 @@ String.prototype.ucFirst = function() {
 
 String.prototype.isQuestion = function() {
   // body...
+  return /[?]$/.test(this.trimWord());
+};
+
+String.prototype.words = function() {
+  // body...
 
 };
