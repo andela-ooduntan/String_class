@@ -42,10 +42,24 @@
     return this.replace(/[,";:?!@#$%(^)&*()_+|.><{}±=-]/g, '');
   };
 
+  String.prototype.trimEx = function(first_argument) {
+    // body...
+    return this.trimWord().replace(/\s+|\s+/g, ' ');
+  };
+
   String.prototype.words = function() {
     // body...
-    var sentence = this.replace(/\s+|\s+/g, ' ');
-    return sentence.removeSym().trimWord().split(/\s/);
+    if (!this.length) {
+      return [];
+    }
+
+    return this.removeSym().trimEx().split(/\s/);
+  };
+
+  String.prototype.wordCount = function() {
+    // body...
+    return this.trimEx().words().length;
+
   };
 
 })();
