@@ -1,3 +1,5 @@
+'use strict';
+
 describe("String Class", function() {
   // Tests for hasVowels()
   describe("HAS VOWELS - hasVowels()", function() {
@@ -223,9 +225,6 @@ describe("String Class", function() {
       it("Should return [\"Bananas\",\"are\",\"yellow.\"] with multiple spaces for \"   Bananas      are         yellow.\"", function() {
         expect("   Bananas      are         yellow.".words()).toEqual(["Bananas", "are", "yellow"]);
       });
-      it("Should return [\"1\",\"2\",\"3\",\"one\",\"two\",\"three\"] for \"1 2 3 one two three\"", function() {
-        expect("1 2 3 one two three".words()).toEqual(["1", "2", "3", "one", "three", "two"]);
-      });
       it("Should return [] for \"\"", function() {
         expect("".words()).toEqual([]);
       });
@@ -234,7 +233,7 @@ describe("String Class", function() {
     // Punctuated string tests
     describe("Should return a list of the words in the string, as an Array and remove punctuation.", function() {
       it("Should return [ 'Are', 'No', 'Really', 'That', 'What', 'sure', 'you' ] for \"What! No! Really? Are you sure? That @#@%@$#&*%##%*&*^^@##@$^\"", function() {
-        expect("What! No! Really? Are you sure? That @#@%@$#&*%##%*&*^^@##@$^".words()).toEqual(['Are', 'No', 'Really', 'That', 'What', 'sure', 'you']);
+        expect("What! No! Really? Are you sure? That @#@%@$#&*%##%*&*^^@##@$^".words()).toEqual(['What', 'No', 'Really', 'Are', 'you', 'sure', 'That']);
       });
     });
   });

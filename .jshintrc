@@ -7,7 +7,7 @@
     "curly": true,
     "eqeqeq": true,
     "forin": true,
-    "freeze": true,
+    "freeze": false,
     "immed": false,
     "latedef": false,
     "newcap": false,
