@@ -97,7 +97,7 @@
    */
   String.prototype.toCurrency = function() {
     if (/[a-z]/i.test(this) === false) {
-      return this.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      return this.replace(/\B(?=(\d{3})+(?!\d))/g, ',').replace(/[0]$/, '');
     }
 
     return NaN;
@@ -108,7 +108,7 @@
    * @return {[type]} [description]
    */
   String.prototype.fromCurrency = function() {
-    return parseFloat(this.replace(/[,]/g, ''));
+    return parseFloat(this.replace(/[^\d\.]/g, ''));
   };
 
 })();

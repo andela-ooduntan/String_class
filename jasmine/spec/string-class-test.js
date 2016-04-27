@@ -301,8 +301,8 @@ describe("String Class", function() {
   describe("FROM CURRENCY - fromCurrency()", function() {
     // Return type test
     describe("Should return a value of type number", function() {
-      it("Should return number for typeof('1,234,567.89'.toCurrency())", function() {
-        expect(typeof('1,234,567.89'.fromCurrency())).toBe("number");
+      it("Should return number for typeof('#1,234,567.89'.toCurrency())", function() {
+        expect(typeof('#1,234,567.89'.fromCurrency())).toBe("number");
       });
     });
 
@@ -310,10 +310,10 @@ describe("String Class", function() {
     describe("Should returns a number representation of the Currency String.", function() {
       // Number strings conversion tests
       it("Should return 123455678 for \"12,345,678\"", function() {
-        expect("12,345,678".fromCurrency()).toEqual(12345678);
+        expect("$12,345,678".fromCurrency()).toEqual(12345678);
       });
       it("Should return 123455678.91 for \"12,345,678.91\"", function() {
-        expect("12,345,678.91".fromCurrency()).toEqual(12345678.91);
+        expect("$12,345,678.91".fromCurrency()).toEqual(12345678.91);
       });
 
     });
