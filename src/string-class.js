@@ -3,7 +3,6 @@
 
   /**
    * [hasVowels description]
-
    * @return {Boolean} [description]
    */
   String.prototype.hasVowels = function() {
@@ -77,11 +76,11 @@
    * @return {[type]} [description]
    */
   String.prototype.words = function() {
-    if (!this.length) {
-      return [];
+    if (this.length) {
+      return this.removeSym().trimEx().split(/\s/);
     }
 
-    return this.removeSym().trimEx().split(/\s/);
+    return [];
   };
 
   /**
