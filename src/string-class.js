@@ -96,7 +96,11 @@
    * @return {[type]} [description]
    */
   String.prototype.toCurrency = function() {
-    return this.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    if (/[a-z]/i.test(this) === false) {
+      return this.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    return NaN;
   };
 
   /**
