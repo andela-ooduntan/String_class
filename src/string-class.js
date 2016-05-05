@@ -116,7 +116,6 @@
   String.prototype.toCurrency = function() {
     // Checks if number contain an alphabet or a symbol.
     if (/[a-z\s?_:\+()&%#@!~\-\$*]/i.test(this) === false) {
-      // 
       var splitedNum = this.split(/\./);
       var decimalPart = null;
 
