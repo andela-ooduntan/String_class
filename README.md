@@ -3,17 +3,16 @@ Extends the functionality of the string class by providng you with methods that 
 
 ## Code Example
 To use _**`String-class`**_ in your page include it at the end of your html page
-
-    ```Html
+    ``` Html
         <!Doctype html>
-            <html>
-                <body>
-                    <!--alot html above-->
-                    <!--include StringJS script an the end of your page-->
-                    <script src="string_class/src/string-class.js"></script>
-                </body>
-     </html>```
-
+        <html>
+            <body>
+                <!--alot html above-->
+                <!--include StringJS script an the end of your page-->
+                <script src="js/strings.js"></script>
+            </body>
+        </html>
+    ```
 
 1. ######  Method _`hasVowels()`._
 
