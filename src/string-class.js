@@ -129,6 +129,7 @@
         var realNumber = parseInt(splitedNum[0]) === 0 ? '0' : splitedNum[0]
           .replace(regEx, ',');
 
+        // Removes decimal number more than three digits.
         if (splitedNum[1].length >= 3) {
           decimalPart = splitedNum[1].substring(0, 2);
         } else {
