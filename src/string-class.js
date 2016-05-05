@@ -73,8 +73,8 @@
   };
 
   /**
-   * [trimWordEx -- description]
-   * @return {String} [description]
+   * [trimWordEx -- Removes wihte spaces within and at the edges of a sentences]
+   * @return {String} [A sentences separated with a single space]
    */
   String.prototype.trimWordEx = function() {
     return this.trimWord().replace(/\s+/g, ' ');
@@ -101,6 +101,14 @@
   };
 
   /**
+   * [fromCurrency -- Converts a currency representation of a String to Number]
+   * @return {[float]} [A number representation of the currency]
+   */
+  String.prototype.fromCurrency = function() {
+    return parseFloat(this.replace(/[^\d.a-z]/ig, ''));
+  };
+
+  /**
    * [toCurrency -- Converts a number representation to money figures in String]
    * @return {[Mixed]} [A currency representation of the currency in String or 
    * NaN if not s number]
@@ -110,6 +118,7 @@
     if (/[a-z\s?_:\+()&%#@!~\-\$*]/i.test(this) === false) {
       // 
       var splitedNum = this.split(/\./);
+      var decimalPart = null;
 
       // Regex groups number in theres without counsuming them.
       var regEx = /\B(?=(\d{3})+(?!\d))/g;
@@ -119,7 +128,12 @@
         // array of numbers contain multiple zeros 
         var realNumber = parseInt(splitedNum[0]) === 0 ? '0' : splitedNum[0]
           .replace(regEx, ',');
-        var decimalPart = splitedNum[1].length >= 3 ? splitedNum[1].substring(0, 2) : splitedNum[1];
+
+        if (splitedNum[1].length >= 3) {
+          decimalPart = splitedNum[1].substring(0, 2);
+        } else {
+          decimalPart = splitedNum[1];
+        }
 
         return decimalPart ? (realNumber + '.' + decimalPart) : realNumber;
       }
@@ -128,14 +142,6 @@
     }
 
     return NaN;
-  };
-
-  /**
-   * [fromCurrency -- Converts a currency representation of a String to Number]
-   * @return {[float]} [A number representation of the currency]
-   */
-  String.prototype.fromCurrency = function() {
-    return parseFloat(this.replace(/[^\d.a-z]/ig, ''));
   };
 
 })();
