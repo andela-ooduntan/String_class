@@ -6,13 +6,13 @@ To use _**`String-class`**_ in your page include it at the end of your html page
 
     ```Html
         <!Doctype html>
-        <html>
-            <body>
-                <!--alot html above-->
-                <!--include StringJS script an the end of your page-->
-                <script src="string_class/src/string-class.js"></script>
-            </body>
-        </html>```
+            <html>
+                <body>
+                    <!--alot html above-->
+                    <!--include StringJS script an the end of your page-->
+                    <script src="string_class/src/string-class.js"></script>
+                </body>
+     </html>```
 
 
 1. ######  Method _`hasVowels()`._
