@@ -2,8 +2,7 @@
 Extends the functionality of the string class by providng you with methods that you can use to manipulate strings to achieve maximum perfomance. Mosts of this methods have been implemented using regular epxressions.
 
 ## Code Example
-
-    To use _**`String-class`**_ in your page include it at the end of your html page
+To use _**`String-class`**_ in your page include it at the end of your html page
     ``` Html
         <!Doctype html>
         <html>
