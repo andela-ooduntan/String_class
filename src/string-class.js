@@ -2,61 +2,70 @@
   'use strict';
 
   /**
-   * [hasVowels description]
-   * @return {Boolean} [description]
+   * [hasVowels -- Checks if a string contain a vowel i.e (A E I O U)]
+   * @return {Boolean} [Returns true if the a 
+   * String contains a vowel and false otherwise.]
    */
   String.prototype.hasVowels = function() {
     return /[aeiou]/i.test(this);
   };
 
   /**
-   * [toUpper description]
-   * @return {[type]} [description]
+   * [toUpper -- Capitalize all the charater in a string]
+   * @return {[String]} [Returns the uppercased string]
    */
   String.prototype.toUpper = function() {
     return this.replace(/[a-z]/g, function(matchedLetter) {
+      // Get the upper case charater by subtracting 32 from the
+      // unicode value of the main charater.
       return String.fromCharCode(matchedLetter.charCodeAt() - 32);
     });
   };
 
   /**
-   * [toLower description]
-   * @return {[type]} [description]
+   * [toLower -- Make a string lowercase]
+   * @return {[String]} [Returns string with all alphabetic
+   * characters converted to lowercase.]
    */
   String.prototype.toLower = function() {
     return this.replace(/[A-Z]/g, function(matchedLetter) {
+      // Get the lower case charater by adding 32 to the
+      // unicode value of the main charater.
       return String.fromCharCode(matchedLetter.charCodeAt() + 32);
     });
   };
 
   /**
-   * [trimWord description]
-   * @return {[type]} [description]
+   * [trimWord -- Strip whitespace from the beginning and end of a string]
+   * @return {[String]} [returns a string with whitespace stripped 
+   * from the beginning and end]
    */
   String.prototype.trimWord = function() {
     return this.replace(/^\s+|\s+$/g, '');
   };
 
   /**
-   * [ucFirst description]
-   * @return {[type]} [description]
+   * [ucFirst -- Make a string's first character uppercase]
+   * @return {[String]} [Returns a string with the first character 
+   * capitalized, if that character is alphabetic]
    */
   String.prototype.ucFirst = function() {
-    return this.toLower().trimWord().replace(/^[a-z]/, function(matchedLetter) {
-      return String.fromCharCode(matchedLetter.charCodeAt() - 32);
+    return this.replace(/^[a-z]/, function(matchedLetter) {
+      return matchedLetter.toUpper();
     });
   };
 
   /**
-   * [isQuestion description]
-   * @return {Boolean} [description]
+   * [isQuestion -- Check if a String ends with a question mark]
+   * @return {Boolean} [Return true if a string ends with 
+   * question mark or false otherwise]
    */
   String.prototype.isQuestion = function() {
-    return /[?]$/.test(this.trimWord());
+    return /.[?]$/.test(this.trimWord());
   };
 
   /**
-   * [removeSym description]
+   * [removeSym -- Strip symbols from a string]
    * @return {[type]} [description]
    */
   String.prototype.removeSym = function() {
@@ -64,51 +73,69 @@
   };
 
   /**
-   * [trimEx description]
+   * [trimWordEx -- description]
    * @return {String} [description]
    */
-  String.prototype.trimEx = function() {
-    return this.trimWord().replace(/\s+|\s+/g, ' ');
+  String.prototype.trimWordEx = function() {
+    return this.trimWord().replace(/\s+/g, ' ');
   };
 
   /**
-   * [words description]
-   * @return {[type]} [description]
+   * [words -- Converts a string to an array of words]
+   * @return {[Array]} [An array of the words in the string]
    */
   String.prototype.words = function() {
     if (this.length) {
-      return this.removeSym().trimEx().split(/\s/);
+      return this.removeSym().trimWordEx().split(/\s/);
     }
 
     return [];
   };
 
   /**
-   * [wordCount description]
-   * @return {[type]} [description]
+   * [wordCount -- Counts the number of the words in a string]
+   * @return {[Integer]} [The number of words in a string]
    */
   String.prototype.wordCount = function() {
-    return this.trimEx().words().length;
+    return this.trimWordEx().words().length;
   };
 
   /**
-   * [toCurrency description]
-   * @return {[type]} [description]
+   * [toCurrency -- Converts a number representation to money figures in String]
+   * @return {[Mixed]} [A currency representation of the currency in String or 
+   * NaN if not s number]
    */
   String.prototype.toCurrency = function() {
-    if (/[a-z]/i.test(this) === false) {
-      return this.replace(/\B(?=(\d{3})+(?!\d))/g, ',').replace(/[0]$/, '');
+    // Checks if number contain an alphabet or a symbol.
+    if (/[a-z\s?_:\+()&%#@!~\-\$*]/i.test(this) === false) {
+      // 
+      var splitedNum = this.split(/\./);
+
+      // Regex groups number in theres without counsuming them.
+      var regEx = /\B(?=(\d{3})+(?!\d))/g;
+
+      if (splitedNum.length > 1) {
+        // Save zero to realNumber if the first element in the 
+        // array of numbers contain multiple zeros 
+        var realNumber = parseInt(splitedNum[0]) === 0 ? '0' : splitedNum[0]
+          .replace(regEx, ',');
+        var decimalPart = splitedNum[1].length >= 3 ? splitedNum[1].substring(0, 2) : splitedNum[1];
+
+        return decimalPart ? (realNumber + '.' + decimalPart) : realNumber;
+      }
+
+      return this.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 
     return NaN;
   };
 
   /**
-   * [fromCurrency description]
-   * @return {[type]} [description]
+   * [fromCurrency -- Converts a currency representation of a String to Number]
+   * @return {[float]} [A number representation of the currency]
    */
   String.prototype.fromCurrency = function() {
-    return parseFloat(this.replace(/[^\d\.]/g, ''));
+    return parseFloat(this.replace(/[^\d.a-z]/ig, ''));
   };
 
 })();
