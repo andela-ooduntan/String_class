@@ -108,6 +108,22 @@
     return parseFloat(this.replace(/[^\d.a-z]/ig, ''));
   };
 
+  String.prototype.formatRealNumber = function() {
+    // Save zero to realNumber if the first element in the 
+    // array of numbers contain multiple zeros 
+    return parseInt(this) === 0 ? '0' : this.groupNumber();
+  };
+
+  String.prototype.formatDecimal = function() {
+    // Removes decimal number more than three digits.
+    return this.length >= 3 ? this.substring(0, 2) : this;
+  };
+
+  String.prototype.groupNumber = function() {
+    // Regex groups number in theres without counsuming them.
+    return this.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
   /**
    * [toCurrency -- Converts a number representation to money figures in String]
    * @return {[Mixed]} [A currency representation of the currency in String or 
@@ -117,31 +133,21 @@
     // Checks if number contain an alphabet or a symbol.
     if (/[a-z\s?_:\+()&%#@!~\-\$*]/i.test(this) === false) {
       var splitedNum = this.split(/\./);
-      var decimalPart = null;
-
-      // Regex groups number in theres without counsuming them.
-      var regEx = /\B(?=(\d{3})+(?!\d))/g;
-
-      if (splitedNum.length > 1) {
-        // Save zero to realNumber if the first element in the 
-        // array of numbers contain multiple zeros 
-        var realNumber = parseInt(splitedNum[0]) === 0 ? '0' : splitedNum[0]
-          .replace(regEx, ',');
-
-        // Removes decimal number more than three digits.
-        if (splitedNum[1].length >= 3) {
-          decimalPart = splitedNum[1].substring(0, 2);
-        } else {
-          decimalPart = splitedNum[1];
-        }
-
-        return decimalPart ? (realNumber + '.' + decimalPart) : realNumber;
-      }
-
-      return this.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      return splitedNum.formatToCurrency();
     }
 
     return NaN;
+  };
+
+  Array.prototype.formatToCurrency = function() {
+    if (this.length > 1) {
+      var realNumber = this[0].formatRealNumber();
+      var decimalPart = this[1].formatDecimal();
+
+      return decimalPart ? (realNumber + '.' + decimalPart) : realNumber;
+    }
+
+    return this[0].groupNumber();
   };
 
 })();
