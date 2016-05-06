@@ -108,17 +108,29 @@
     return parseFloat(this.replace(/[^\d.a-z]/ig, ''));
   };
 
+  /**
+   * [formatRealNumber Formats a numerical whole number to currency]
+   * @return {[String]} [A group of three digit separented with commas]
+   */
   String.prototype.formatRealNumber = function() {
     // Save zero to realNumber if the first element in the 
     // array of numbers contain multiple zeros 
     return parseInt(this) === 0 ? '0' : this.groupNumber();
   };
 
+  /**
+   * [formatDecimal Formats the decimal part of a number]
+   * @return {[String]} [A string of number less than 100]
+   */
   String.prototype.formatDecimal = function() {
     // Removes decimal number more than three digits.
     return this.length >= 3 ? this.substring(0, 2) : this;
   };
 
+  /**
+   * [groupNumber Groups numbers in 3's]
+   * @return {[String]} [A string of numbers grouped in 3's]
+   */
   String.prototype.groupNumber = function() {
     // Regex groups number in theres without counsuming them.
     return this.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -139,6 +151,10 @@
     return NaN;
   };
 
+  /**
+   * [formatToCurrency Formats an array of number to currency.]
+   * @return {[String]} [The currency representation of the number passed to it]
+   */
   Array.prototype.formatToCurrency = function() {
     if (this.length > 1) {
       var realNumber = this[0].formatRealNumber();
